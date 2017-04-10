@@ -20,6 +20,10 @@
             <asp:TextBox ID="TextBox3" runat="server" ReadOnly="True" Text="10级*1 + 9级*1 + 8级*2" Width="50%"></asp:TextBox>
             <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="下载" style="height: 21px"/>
         </div>
+        <div style="margin:20px auto; width:100%" align="center">
+            <asp:TextBox ID="TextBox4" runat="server" ReadOnly="True" Text="3——5位数 10笔" Width="50%"></asp:TextBox>
+            <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="下载" style="height: 21px"/>
+        </div>
     </form>
 </body>
 </html>

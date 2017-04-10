@@ -27,6 +27,7 @@ using System;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Collections.Generic;
 
 using NPOI.HPSF;
 using NPOI.HSSF.UserModel;
@@ -83,14 +84,28 @@ namespace ExportXlsToDownload
             Response.End();
         }
 
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            string filename = "quiz.zip";
+            Response.ContentType = "application/zip";
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", filename));
+            Response.Clear();
+
+            InitializeWorkbook();
+            GenerateData4();
+            Response.BinaryWrite(WriteToStream().GetBuffer());
+            Response.End();
+        }
+
         HSSFWorkbook hssfworkbook;
         CellStyle indexStyle;
         CellStyle quizStyle;
         CellStyle ansStyle;
         CellStyle headerStyle;
         CellStyle titleStyle;
+        CellStyle headtextStyle;
         int indexCount = 10;
-        int[] mixIndex = { 3, 4, 8, 9 };
+        List<int> mixIndex = new List<int>{ 3, 4, 8, 9 };
         Random rnd = new Random();
 
         MemoryStream WriteToStream()
@@ -149,6 +164,11 @@ namespace ExportXlsToDownload
                 sheet.PrintSetup.PaperSize = (short)PaperSize.B4;
                 sheet.PrintSetup.Landscape = false;
                 sheet.Footer.Center = sheet.SheetName;
+
+                Cell c = sheet.CreateRow(rownum++).CreateCell(0);
+                c.CellStyle = headtextStyle;
+                c.SetCellValue("庆龄幼儿园珠心算训练题——第二套");
+                sheet.AddMergedRegion(new CellRangeAddress(0, 0, 0, 9));
 
                 Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
                 Print<Lv8>(ref sheet, ref rownum, ref rand, ref index);
@@ -259,9 +279,52 @@ namespace ExportXlsToDownload
             c.SetCellValue(s);
         }
 
-        void Print<T>(ref Sheet sheet, ref int rownum, ref Random rand, ref int index) where T : Lv, new()
+        void GenerateData4()
         {
-            PrintIndex(ref sheet, ref rownum, ref index);
+            indexCount = 6;
+            mixIndex.Clear();
+            mixIndex.Add(2);
+            mixIndex.Add(5);
+            Random rand = new Random();
+            for (int sheetNum = 1; sheetNum <= 20; ++sheetNum)
+            {
+                int index = 1;
+                int rownum = 0;
+                Sheet sheet = hssfworkbook.CreateSheet(sheetNum.ToString());
+                sheet.DefaultColumnWidth = 18;
+                sheet.DefaultRowHeightInPoints = 20;
+                sheet.PrintSetup.PaperSize = (short)PaperSize.A4;
+                sheet.PrintSetup.Landscape = false;
+                sheet.Footer.Center = sheet.SheetName;
+                
+                Cell c = sheet.CreateRow(rownum++).CreateCell(0);
+                c.CellStyle = headtextStyle;
+                c.SetCellValue("3--5位数 10笔");
+                CellRangeAddress region = new CellRangeAddress(0, 0, 0, 5);
+                sheet.AddMergedRegion(region);
+                ((HSSFSheet)sheet).SetBorderBottomOfRegion(region, CellBorderType.THIN, HSSFColor.BLACK.index);
+
+                Print<C_3_5_10>(ref sheet, ref rownum, ref rand, ref index, false);
+                Print<C_3_5_10>(ref sheet, ref rownum, ref rand, ref index, false);
+                Print<C_3_5_10>(ref sheet, ref rownum, ref rand, ref index, false);
+                Print<C_3_5_10>(ref sheet, ref rownum, ref rand, ref index, false);
+            }
+
+            indexCount = 10;
+            mixIndex.Clear();
+            mixIndex.Add(3);
+            mixIndex.Add(4);
+            mixIndex.Add(8);
+            mixIndex.Add(9);
+        }
+
+        void Print<T>(ref Sheet sheet, ref int rownum, ref Random rand, ref int index, bool hasIndex = true) where T : Lv, new()
+        {
+            if (hasIndex)
+            {
+                PrintIndex(ref sheet, ref rownum, ref index);
+            }
+            
             Lv[] lvs = new Lv[indexCount];
             for (int i = 0; i < indexCount; ++i)
             {
@@ -326,20 +389,22 @@ namespace ExportXlsToDownload
             quizStyle = hssfworkbook.CreateCellStyle();
             Font quizFont = hssfworkbook.CreateFont();
             quizFont.FontName = "黑体";
-            quizFont.FontHeightInPoints = 16;
+            quizFont.FontHeightInPoints = 13;
             quizStyle.SetFont(quizFont);
             quizStyle.BorderLeft = CellBorderType.THIN;
             quizStyle.BorderRight = CellBorderType.THIN;
+            quizStyle.DataFormat = HSSFDataFormat.GetBuiltinFormat("#,##0");
 
             ansStyle = hssfworkbook.CreateCellStyle();
             Font ansFont = hssfworkbook.CreateFont();
             ansFont.FontName = "宋体";
-            ansFont.FontHeightInPoints = 16;
+            ansFont.FontHeightInPoints = 14;
             ansStyle.SetFont(ansFont);
             ansStyle.BorderTop = CellBorderType.THIN;
             ansStyle.BorderBottom = CellBorderType.THIN;
             ansStyle.BorderLeft = CellBorderType.THIN;
             ansStyle.BorderRight = CellBorderType.THIN;
+            ansStyle.DataFormat = HSSFDataFormat.GetBuiltinFormat("#,##0");
 
             headerStyle = hssfworkbook.CreateCellStyle();
             Font headerFont = hssfworkbook.CreateFont();
@@ -358,6 +423,14 @@ namespace ExportXlsToDownload
             titleFont.Boldweight = (short)FontBoldWeight.BOLD;
             titleStyle.SetFont(titleFont);
             titleStyle.Alignment = HorizontalAlignment.CENTER;
+
+            headtextStyle = hssfworkbook.CreateCellStyle();
+            Font headtextFont = hssfworkbook.CreateFont();
+            headtextFont.FontName = "宋体";
+            headtextFont.FontHeightInPoints = 16;
+            headtextStyle.SetFont(headtextFont);
+            headerStyle.BorderBottom = CellBorderType.THIN;
+            headtextStyle.Alignment = HorizontalAlignment.LEFT;
 
             ////create a entry of DocumentSummaryInformation
             DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();

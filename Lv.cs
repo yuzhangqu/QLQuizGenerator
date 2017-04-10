@@ -17,6 +17,8 @@ namespace ExportXlsToDownload
         public int ThreeDigitMinus { get; set; }
         public int FourDigit { get; set; }
         public int FourDigitMinus { get; set; }
+        public int FiveDigit { get; set; }
+        public int FiveDigitMinus { get; set; }
 
         public Lv(int count)
         {
@@ -30,6 +32,8 @@ namespace ExportXlsToDownload
             ThreeDigitMinus = 0;
             FourDigit = 0;
             FourDigitMinus = 0;
+            FiveDigit = 0;
+            FiveDigitMinus = 0;
         }
 
         public abstract void Init(ref Random rand, bool mix = false);
@@ -78,6 +82,16 @@ namespace ExportXlsToDownload
                 for (int i = 0; i < FourDigitMinus; ++i)
                 {
                     Nums[index++] = 0 - rand.Next(1000, 10000);
+                }
+
+                for (int i = 0; i < FiveDigit; ++i)
+                {
+                    Nums[index++] = rand.Next(10000, 100000);
+                }
+
+                for (int i = 0; i < FiveDigitMinus; ++i)
+                {
+                    Nums[index++] = 0 - rand.Next(10000, 100000);
                 }
             } while (Negative());
 
