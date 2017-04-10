@@ -81,6 +81,7 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Lv.cs" />
+    <Compile Include="Lv10.cs" />
     <Compile Include="Lv6.cs" />
     <Compile Include="Lv7.cs" />
     <Compile Include="Lv8.cs" />
@@ -89,9 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

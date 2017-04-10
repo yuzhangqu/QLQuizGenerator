@@ -6,3 +6,8 @@ D:\Projects\NPOI.Examples\ExportXlsToDownload\bin\Ionic.Zip.dll
 D:\Projects\NPOI.Examples\ExportXlsToDownload\obj\Debug\ExportXlsToDownload.dll
 D:\Projects\NPOI.Examples\ExportXlsToDownload\obj\Debug\ExportXlsToDownload.pdb
 D:\Projects\NPOI.Examples\ExportXlsToDownload\obj\Debug\ExportXlsToDownload.csprojResolveAssemblyReference.cache
+D:\Projects\QLQuizGenerator\bin\ExportXlsToDownload.dll.config
+D:\Projects\QLQuizGenerator\bin\ExportXlsToDownload.dll
+D:\Projects\QLQuizGenerator\bin\ExportXlsToDownload.pdb
+D:\Projects\QLQuizGenerator\obj\Debug\ExportXlsToDownload.dll
+D:\Projects\QLQuizGenerator\obj\Debug\ExportXlsToDownload.pdb

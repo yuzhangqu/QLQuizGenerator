@@ -70,10 +70,25 @@ namespace ExportXlsToDownload
             Response.End();
         }
 
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            string filename = "quiz.zip";
+            Response.ContentType = "application/zip";
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", filename));
+            Response.Clear();
+
+            InitializeWorkbook();
+            GenerateData3();
+            Response.BinaryWrite(WriteToStream().GetBuffer());
+            Response.End();
+        }
+
         HSSFWorkbook hssfworkbook;
         CellStyle indexStyle;
         CellStyle quizStyle;
         CellStyle ansStyle;
+        CellStyle headerStyle;
+        CellStyle titleStyle;
         int indexCount = 10;
         int[] mixIndex = { 3, 4, 8, 9 };
         Random rnd = new Random();
@@ -165,6 +180,85 @@ namespace ExportXlsToDownload
             }
         }
 
+        void GenerateData3()
+        {
+            Random rand = new Random();
+            for (int sheetNum = 1; sheetNum <= 20; ++sheetNum)
+            {
+                int index = 1;
+                int rownum = 0;
+                Sheet sheet = hssfworkbook.CreateSheet(sheetNum.ToString());
+                sheet.DefaultColumnWidth = 11;
+                sheet.DefaultRowHeightInPoints = 20;
+                sheet.PrintSetup.PaperSize = (short)PaperSize.B4;
+                sheet.PrintSetup.Landscape = false;
+                sheet.Footer.Center = sheet.SheetName;
+
+                PrintHeader(ref sheet, ref rownum);
+                Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv8>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv8>(ref sheet, ref rownum, ref rand, ref index);
+            }
+        }
+
+        void PrintHeader(ref Sheet sheet, ref int rownum)
+        {
+            Cell c = sheet.CreateRow(rownum++).CreateCell(0);
+            c.CellStyle = titleStyle;
+            c.SetCellValue("武汉市珠心算选拔赛模拟试题");
+            sheet.AddMergedRegion(new CellRangeAddress(0, 0, 0, 9));
+            rownum++;
+
+            Row row = sheet.CreateRow(rownum++);
+            SetCellString(ref row, 0, headerStyle, "单位");
+            SetCellString(ref row, 1, headerStyle, " ");
+            SetCellString(ref row, 2, headerStyle, "姓名");
+            SetCellString(ref row, 3, headerStyle, " ");
+            SetCellString(ref row, 4, headerStyle, "考号");
+            SetCellString(ref row, 5, headerStyle, " ");
+            SetCellString(ref row, 9, headerStyle, "限时5分钟", false);
+            rownum++;
+
+            row = sheet.CreateRow(rownum++);
+            SetCellString(ref row, 3, headerStyle, " ");
+            SetCellString(ref row, 4, headerStyle, "计算题");
+            SetCellString(ref row, 5, headerStyle, "错题");
+            SetCellString(ref row, 6, headerStyle, "对题");
+            SetCellString(ref row, 7, headerStyle, "初审");
+            SetCellString(ref row, 8, headerStyle, "复核");
+            SetCellString(ref row, 9, headerStyle, "成绩");
+
+            row = sheet.CreateRow(rownum++);
+            SetCellString(ref row, 3, headerStyle, "本页");
+            SetCellString(ref row, 4, headerStyle, " ");
+            SetCellString(ref row, 5, headerStyle, " ");
+            SetCellString(ref row, 6, headerStyle, " ");
+            SetCellString(ref row, 7, headerStyle, " ");
+            SetCellString(ref row, 8, headerStyle, " ");
+            SetCellString(ref row, 9, headerStyle, " ");
+
+            row = sheet.CreateRow(rownum++);
+            SetCellString(ref row, 3, headerStyle, "合计");
+            SetCellString(ref row, 4, headerStyle, " ");
+            SetCellString(ref row, 5, headerStyle, " ");
+            SetCellString(ref row, 6, headerStyle, " ");
+            SetCellString(ref row, 7, headerStyle, " ");
+            SetCellString(ref row, 8, headerStyle, " ");
+            SetCellString(ref row, 9, headerStyle, " ");
+            rownum++;
+        }
+
+        void SetCellString(ref Row row, int i, CellStyle style, string s, bool b = true)
+        {
+            Cell c = row.CreateCell(i);
+            if (b)
+            {
+                c.CellStyle = style;
+            }
+            c.SetCellValue(s);
+        }
+
         void Print<T>(ref Sheet sheet, ref int rownum, ref Random rand, ref int index) where T : Lv, new()
         {
             PrintIndex(ref sheet, ref rownum, ref index);
@@ -232,7 +326,7 @@ namespace ExportXlsToDownload
             quizStyle = hssfworkbook.CreateCellStyle();
             Font quizFont = hssfworkbook.CreateFont();
             quizFont.FontName = "黑体";
-            quizFont.FontHeightInPoints = 14;
+            quizFont.FontHeightInPoints = 16;
             quizStyle.SetFont(quizFont);
             quizStyle.BorderLeft = CellBorderType.THIN;
             quizStyle.BorderRight = CellBorderType.THIN;
@@ -240,12 +334,30 @@ namespace ExportXlsToDownload
             ansStyle = hssfworkbook.CreateCellStyle();
             Font ansFont = hssfworkbook.CreateFont();
             ansFont.FontName = "宋体";
-            ansFont.FontHeightInPoints = 14;
+            ansFont.FontHeightInPoints = 16;
             ansStyle.SetFont(ansFont);
             ansStyle.BorderTop = CellBorderType.THIN;
             ansStyle.BorderBottom = CellBorderType.THIN;
             ansStyle.BorderLeft = CellBorderType.THIN;
             ansStyle.BorderRight = CellBorderType.THIN;
+
+            headerStyle = hssfworkbook.CreateCellStyle();
+            Font headerFont = hssfworkbook.CreateFont();
+            headerFont.FontName = "宋体";
+            headerFont.FontHeightInPoints = 16;
+            headerStyle.SetFont(headerFont);
+            headerStyle.BorderTop = CellBorderType.THIN;
+            headerStyle.BorderBottom = CellBorderType.THIN;
+            headerStyle.BorderLeft = CellBorderType.THIN;
+            headerStyle.BorderRight = CellBorderType.THIN;
+
+            titleStyle = hssfworkbook.CreateCellStyle();
+            Font titleFont = hssfworkbook.CreateFont();
+            titleFont.FontName = "宋体";
+            titleFont.FontHeightInPoints = 36;
+            titleFont.Boldweight = (short)FontBoldWeight.BOLD;
+            titleStyle.SetFont(titleFont);
+            titleStyle.Alignment = HorizontalAlignment.CENTER;
 
             ////create a entry of DocumentSummaryInformation
             DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();
