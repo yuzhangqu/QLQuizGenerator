@@ -46,14 +46,14 @@ namespace ExportXlsToDownload
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string filename="quiz.zip";
+            string filename = "quiz.zip";
             //Response.ContentType = "application/vnd.ms-excel";
             Response.ContentType = "application/zip";
-            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}",filename));
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", filename));
             Response.Clear();
 
             InitializeWorkbook();
-            GenerateData();            
+            GenerateData();
             Response.BinaryWrite(WriteToStream().GetBuffer());
             Response.End();
         }
@@ -97,6 +97,45 @@ namespace ExportXlsToDownload
             Response.End();
         }
 
+        protected void Button5_Click(object sender, EventArgs e)
+        {
+            string filename = "quiz.zip";
+            Response.ContentType = "application/zip";
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", filename));
+            Response.Clear();
+
+            InitializeWorkbook();
+            GenerateData5();
+            Response.BinaryWrite(WriteToStream().GetBuffer());
+            Response.End();
+        }
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            string filename = "quiz.zip";
+            Response.ContentType = "application/zip";
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", filename));
+            Response.Clear();
+
+            InitializeWorkbook();
+            GenerateData6();
+            Response.BinaryWrite(WriteToStream().GetBuffer());
+            Response.End();
+        }
+
+        protected void Button7_Click(object sender, EventArgs e)
+        {
+            string filename = "quiz.zip";
+            Response.ContentType = "application/zip";
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", filename));
+            Response.Clear();
+
+            InitializeWorkbook();
+            GenerateData7();
+            Response.BinaryWrite(WriteToStream().GetBuffer());
+            Response.End();
+        }
+
         HSSFWorkbook hssfworkbook;
         CellStyle indexStyle;
         CellStyle quizStyle;
@@ -105,11 +144,11 @@ namespace ExportXlsToDownload
         CellStyle titleStyle;
         CellStyle headtextStyle;
         int indexCount = 10;
-        List<int> mixIndex = new List<int>{ 3, 4, 8, 9 };
+        List<int> mixIndex = new List<int> { 3, 4, 8, 9 };
         Random rnd = new Random();
 
         MemoryStream WriteToStream()
-        { 
+        {
             using (var compressedFileStream = new MemoryStream())
             {
                 //Create an archive and store the stream in memory.
@@ -167,7 +206,7 @@ namespace ExportXlsToDownload
 
                 Cell c = sheet.CreateRow(rownum++).CreateCell(0);
                 c.CellStyle = headtextStyle;
-                c.SetCellValue("庆龄幼儿园珠心算训练题——第二套");
+                c.SetCellValue("庆龄幼儿园珠心算训练题——第三套");
                 sheet.AddMergedRegion(new CellRangeAddress(0, 0, 0, 9));
 
                 Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
@@ -296,7 +335,7 @@ namespace ExportXlsToDownload
                 sheet.PrintSetup.PaperSize = (short)PaperSize.A4;
                 sheet.PrintSetup.Landscape = false;
                 sheet.Footer.Center = sheet.SheetName;
-                
+
                 Cell c = sheet.CreateRow(rownum++).CreateCell(0);
                 c.CellStyle = headtextStyle;
                 c.SetCellValue("3--5位数 10笔");
@@ -318,13 +357,83 @@ namespace ExportXlsToDownload
             mixIndex.Add(9);
         }
 
+        void GenerateData5()
+        {
+            Random rand = new Random();
+            for (int sheetNum = 1; sheetNum <= 20; ++sheetNum)
+            {
+                int index = 1;
+                int rownum = 0;
+                Sheet sheet = hssfworkbook.CreateSheet(sheetNum.ToString());
+                sheet.DefaultColumnWidth = 10;
+                sheet.DefaultRowHeightInPoints = 20;
+                sheet.PrintSetup.PaperSize = (short)PaperSize.A4;
+                sheet.PrintSetup.Landscape = false;
+                sheet.Footer.Center = sheet.SheetName;
+
+                Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
+            }
+        }
+
+        void GenerateData6()
+        {
+            Random rand = new Random();
+            for (int sheetNum = 1; sheetNum <= 20; ++sheetNum)
+            {
+                int index = 1;
+                int rownum = 0;
+                Sheet sheet = hssfworkbook.CreateSheet(sheetNum.ToString());
+                sheet.DefaultColumnWidth = 10;
+                sheet.DefaultRowHeightInPoints = 20;
+                sheet.PrintSetup.PaperSize = (short)PaperSize.A4;
+                sheet.PrintSetup.Landscape = false;
+                sheet.Footer.Center = sheet.SheetName;
+
+                Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
+            }
+        }
+
+        void GenerateData7()
+        {
+            Random rand = new Random();
+            int index = 1;
+            int rownum = 0;
+            Sheet sheet = hssfworkbook.CreateSheet("书面赛");
+            sheet.DefaultColumnWidth = 11;
+            sheet.DefaultRowHeightInPoints = 15;
+            sheet.PrintSetup.PaperSize = (short)PaperSize.B4;
+            sheet.PrintSetup.Landscape = false;
+
+            sheet.CreateRow(rownum++).CreateCell(9);
+            rownum++;
+
+            Cell c = sheet.CreateRow(rownum++).CreateCell(0);
+            c.CellStyle = headtextStyle;
+            c.SetCellValue("2017年武汉市珠心算选拔赛 - 书面赛");
+            sheet.AddMergedRegion(new CellRangeAddress(2, 2, 0, 9));
+
+            Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
+            Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
+            Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
+            Print<Lv8>(ref sheet, ref rownum, ref rand, ref index);
+            Print<Lv8>(ref sheet, ref rownum, ref rand, ref index);
+        }
+
         void Print<T>(ref Sheet sheet, ref int rownum, ref Random rand, ref int index, bool hasIndex = true) where T : Lv, new()
         {
             if (hasIndex)
             {
                 PrintIndex(ref sheet, ref rownum, ref index);
             }
-            
+
             Lv[] lvs = new Lv[indexCount];
             for (int i = 0; i < indexCount; ++i)
             {
@@ -340,7 +449,7 @@ namespace ExportXlsToDownload
             }
 
             for (int j = 0; j < indexCount; ++j)
-            { 
+            {
                 for (int i = 0; i < count; ++i)
                 {
                     Cell c = sheet.GetRow(rownum + i).CreateCell(j, CellType.NUMERIC);
@@ -388,7 +497,7 @@ namespace ExportXlsToDownload
 
             quizStyle = hssfworkbook.CreateCellStyle();
             Font quizFont = hssfworkbook.CreateFont();
-            quizFont.FontName = "黑体";
+            quizFont.FontName = "Lucida Console";
             quizFont.FontHeightInPoints = 13;
             quizStyle.SetFont(quizFont);
             quizStyle.BorderLeft = CellBorderType.THIN;
@@ -397,7 +506,7 @@ namespace ExportXlsToDownload
 
             ansStyle = hssfworkbook.CreateCellStyle();
             Font ansFont = hssfworkbook.CreateFont();
-            ansFont.FontName = "宋体";
+            ansFont.FontName = "Lucida Console";
             ansFont.FontHeightInPoints = 14;
             ansStyle.SetFont(ansFont);
             ansStyle.BorderTop = CellBorderType.THIN;
@@ -427,10 +536,11 @@ namespace ExportXlsToDownload
             headtextStyle = hssfworkbook.CreateCellStyle();
             Font headtextFont = hssfworkbook.CreateFont();
             headtextFont.FontName = "宋体";
-            headtextFont.FontHeightInPoints = 16;
+            headtextFont.FontHeightInPoints = 28;
+            headtextFont.Boldweight = (short)FontBoldWeight.BOLD;
             headtextStyle.SetFont(headtextFont);
             headerStyle.BorderBottom = CellBorderType.THIN;
-            headtextStyle.Alignment = HorizontalAlignment.LEFT;
+            headtextStyle.Alignment = HorizontalAlignment.CENTER;
 
             ////create a entry of DocumentSummaryInformation
             DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();

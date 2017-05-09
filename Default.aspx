@@ -24,6 +24,18 @@
             <asp:TextBox ID="TextBox4" runat="server" ReadOnly="True" Text="3——5位数 10笔" Width="50%"></asp:TextBox>
             <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="下载" style="height: 21px"/>
         </div>
+        <div style="margin:20px auto; width:100%" align="center">
+            <asp:TextBox ID="TextBox5" runat="server" ReadOnly="True" Text="9级*5" Width="50%"></asp:TextBox>
+            <asp:Button ID="Button5" runat="server" OnClick="Button5_Click" Text="下载" style="height: 21px"/>
+        </div>
+        <div style="margin:20px auto; width:100%" align="center">
+            <asp:TextBox ID="TextBox6" runat="server" ReadOnly="True" Text="10级*5" Width="50%"></asp:TextBox>
+            <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="下载" style="height: 21px"/>
+        </div>
+        <div style="margin:20px auto; width:100%" align="center">
+            <asp:TextBox ID="TextBox7" runat="server" ReadOnly="True" Text="选拔赛试题" Width="50%"></asp:TextBox>
+            <asp:Button ID="Button7" runat="server" OnClick="Button7_Click" Text="下载" style="height: 21px"/>
+        </div>
     </form>
 </body>
 </html>

@@ -69,6 +69,10 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\hack-extended.css" />
+    <Content Include="Content\hack-extended.min.css" />
+    <Content Include="Content\hack.css" />
+    <Content Include="Content\hack.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -91,6 +95,105 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff\latin\hack-regular-latin-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff\latin\hack-italic-latin-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff\latin\hack-bolditalic-latin-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff\latin\hack-bold-latin-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff\hack-regular-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff\hack-italic-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff\hack-bolditalic-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff\hack-bold-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff2\latin\hack-regular-latin-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff2\latin\hack-italic-latin-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff2\latin\hack-bolditalic-latin-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff2\latin\hack-bold-latin-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff2\hack-regular-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff2\hack-italic-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff2\hack-bolditalic-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\woff2\hack-bold-webfont.woff2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\web-ttf\latin\hack-regular-latin-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\web-ttf\latin\hack-italic-latin-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\web-ttf\latin\hack-bolditalic-latin-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\web-ttf\latin\hack-bold-latin-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\web-ttf\hack-regular-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\web-ttf\hack-italic-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\web-ttf\hack-bolditalic-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\web-ttf\hack-bold-webfont.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\eot\latin\hack-regular-latin-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\eot\latin\hack-italic-latin-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\eot\latin\hack-bolditalic-latin-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\eot\latin\hack-bold-latin-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\eot\hack-regular-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\eot\hack-italic-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\eot\hack-bolditalic-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\eot\hack-bold-webfont.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
