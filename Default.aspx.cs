@@ -393,6 +393,13 @@ namespace ExportXlsToDownload
                 sheet.PrintSetup.Landscape = false;
                 sheet.Footer.Center = sheet.SheetName;
 
+                Cell c = sheet.CreateRow(rownum++).CreateCell(0);
+                c.CellStyle = headtextStyle;
+                c.SetCellValue("武汉市庆龄幼儿园珠心算十级训练题");
+                sheet.AddMergedRegion(new CellRangeAddress(rownum - 1, rownum - 1, 0, 9));
+
+                Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
                 Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
                 Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
                 Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
@@ -498,7 +505,7 @@ namespace ExportXlsToDownload
             quizStyle = hssfworkbook.CreateCellStyle();
             Font quizFont = hssfworkbook.CreateFont();
             quizFont.FontName = "Lucida Console";
-            quizFont.FontHeightInPoints = 13;
+            quizFont.FontHeightInPoints = 14;
             quizStyle.SetFont(quizFont);
             quizStyle.BorderLeft = CellBorderType.THIN;
             quizStyle.BorderRight = CellBorderType.THIN;

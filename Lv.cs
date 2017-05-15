@@ -143,7 +143,7 @@ namespace ExportXlsToDownload
             for (int i = 1; i < Count; ++i)
             {
                 sum += Nums[i];
-                if (sum < 0 || old == Nums[i])
+                if (sum < 0 || old == Nums[i] || old + Nums[i] == 0)
                 {
                     return true;
                 }
