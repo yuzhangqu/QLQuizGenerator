@@ -6,8 +6,8 @@ namespace ExportXlsToDownload
 {
     public abstract class Lv
     {
-        public int Count { get; }
-        public int[] Nums { get; }
+        public int Count { get; set; }
+        public int[] Nums { get; set; }
         public int OneDigit { get; set; }
         public int OneDigitMinus { get; set; }
         public int TwoDigit { get; set; }

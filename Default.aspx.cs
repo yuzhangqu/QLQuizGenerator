@@ -413,7 +413,7 @@ namespace ExportXlsToDownload
             Random rand = new Random();
             int index = 1;
             int rownum = 0;
-            Sheet sheet = hssfworkbook.CreateSheet("书面赛");
+            Sheet sheet = hssfworkbook.CreateSheet("看心算");
             sheet.DefaultColumnWidth = 11;
             sheet.DefaultRowHeightInPoints = 15;
             sheet.PrintSetup.PaperSize = (short)PaperSize.B4;
@@ -424,14 +424,13 @@ namespace ExportXlsToDownload
 
             Cell c = sheet.CreateRow(rownum++).CreateCell(0);
             c.CellStyle = headtextStyle;
-            c.SetCellValue("2017年武汉市珠心算选拔赛 - 书面赛");
+            c.SetCellValue("2018年武汉市珠心算比赛 - 看心算");
             sheet.AddMergedRegion(new CellRangeAddress(2, 2, 0, 9));
 
             Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
             Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
-            Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
             Print<Lv8>(ref sheet, ref rownum, ref rand, ref index);
-            Print<Lv8>(ref sheet, ref rownum, ref rand, ref index);
+            Print<Lv7>(ref sheet, ref rownum, ref rand, ref index);
         }
 
         void Print<T>(ref Sheet sheet, ref int rownum, ref Random rand, ref int index, bool hasIndex = true) where T : Lv, new()
@@ -546,7 +545,7 @@ namespace ExportXlsToDownload
             headtextFont.FontHeightInPoints = 28;
             headtextFont.Boldweight = (short)FontBoldWeight.BOLD;
             headtextStyle.SetFont(headtextFont);
-            headerStyle.BorderBottom = CellBorderType.THIN;
+            headtextStyle.BorderBottom = CellBorderType.THIN;
             headtextStyle.Alignment = HorizontalAlignment.CENTER;
 
             ////create a entry of DocumentSummaryInformation

@@ -33,7 +33,7 @@
             <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="下载" style="height: 21px"/>
         </div>
         <div style="margin:20px auto; width:100%" align="center">
-            <asp:TextBox ID="TextBox7" runat="server" ReadOnly="True" Text="选拔赛试题" Width="50%"></asp:TextBox>
+            <asp:TextBox ID="TextBox7" runat="server" ReadOnly="True" Text="2018年武汉市比赛" Width="50%"></asp:TextBox>
             <asp:Button ID="Button7" runat="server" OnClick="Button7_Click" Text="下载" style="height: 21px"/>
         </div>
     </form>
