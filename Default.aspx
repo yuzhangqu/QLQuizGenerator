@@ -36,6 +36,10 @@
             <asp:TextBox ID="TextBox7" runat="server" ReadOnly="True" Text="2018年武汉市比赛" Width="50%"></asp:TextBox>
             <asp:Button ID="Button7" runat="server" OnClick="Button7_Click" Text="下载" style="height: 21px"/>
         </div>
+        <div style="margin:20px auto; width:100%" align="center">
+            <asp:TextBox ID="TextBox8" runat="server" ReadOnly="True" Text="庆龄珠心算小学组训练题" Width="50%"></asp:TextBox>
+            <asp:Button ID="Button8" runat="server" OnClick="Button8_Click" Text="下载" style="height: 21px"/>
+        </div>
     </form>
 </body>
 </html>

@@ -136,9 +136,23 @@ namespace ExportXlsToDownload
             Response.End();
         }
 
+        protected void Button8_Click(object sender, EventArgs e)
+        {
+            string filename = "quiz.zip";
+            Response.ContentType = "application/zip";
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", filename));
+            Response.Clear();
+
+            InitializeWorkbook();
+            GenerateData8();
+            Response.BinaryWrite(WriteToStream().GetBuffer());
+            Response.End();
+        }
+
         HSSFWorkbook hssfworkbook;
         CellStyle indexStyle;
         CellStyle quizStyle;
+        CellStyle multStyle;
         CellStyle ansStyle;
         CellStyle headerStyle;
         CellStyle titleStyle;
@@ -433,6 +447,44 @@ namespace ExportXlsToDownload
             Print<Lv7>(ref sheet, ref rownum, ref rand, ref index);
         }
 
+        void GenerateData8()
+        {
+            indexCount = 5;
+            Random rand = new Random();
+            for (int sheetNum = 1; sheetNum <= 8; ++sheetNum)
+            {
+                int index = 1;
+                int rownum = 0;
+                Sheet sheet = hssfworkbook.CreateSheet(sheetNum.ToString());
+                sheet.DefaultColumnWidth = 11;
+                sheet.DefaultRowHeightInPoints = 15;
+                sheet.PrintSetup.PaperSize = (short)PaperSize.A4;
+                sheet.PrintSetup.Landscape = false;
+                sheet.Footer.Center = sheet.SheetName;
+                sheet.SetColumnWidth(indexCount, (int)((2.43 + 0.72) * 256));
+                sheet.SetColumnWidth(indexCount + 1, (int)((14 + 0.72) * 256));
+
+                Cell c = sheet.CreateRow(rownum++).CreateCell(0);
+                c.CellStyle = headtextStyle;
+                c.SetCellValue("庆龄珠心算小学组训练题");
+                sheet.AddMergedRegion(new CellRangeAddress(rownum - 1, rownum - 1, 0, 7));
+
+                
+                int headrow = rownum;
+                Print<Lv7>(ref sheet, ref rownum, ref rand, ref index);
+                PrintMulti(ref sheet, headrow, ref rand, indexCount + 1, sheetNum + 1, 2, 12);
+
+                headrow = rownum;
+                Print<Lv7>(ref sheet, ref rownum, ref rand, ref index);
+                PrintMulti(ref sheet, headrow, ref rand, indexCount + 1, sheetNum + 1, 3, 12);
+
+                headrow = rownum;
+                Print<Lv7>(ref sheet, ref rownum, ref rand, ref index);
+                PrintMulti(ref sheet, headrow, ref rand, indexCount + 1, sheetNum + 1, 4, 12);
+                
+            }
+        }
+
         void Print<T>(ref Sheet sheet, ref int rownum, ref Random rand, ref int index, bool hasIndex = true) where T : Lv, new()
         {
             if (hasIndex)
@@ -484,6 +536,99 @@ namespace ExportXlsToDownload
             }
         }
 
+        void PrintMulti(ref Sheet sheet, int headrow, ref Random rand, int index, int number, int digit, int count)
+        {
+            Cell c;
+            int Qindex = indexCount + 1;
+            int Aindex = Qindex + 1;
+            switch (digit)
+            {
+                case 2:
+                    c = sheet.GetRow(headrow).CreateCell(Qindex);
+                    c.CellStyle = indexStyle;
+                    c.SetCellValue("两位数");
+                    c = sheet.GetRow(headrow).CreateCell(Aindex);
+                    c.CellStyle = indexStyle;
+                    sheet.AddMergedRegion(new CellRangeAddress(headrow, headrow, indexCount + 1, indexCount + 2));
+
+                    for (int i = 1; i <= count; ++i)
+                    {
+                        c = sheet.GetRow(headrow + i).CreateCell(Qindex, CellType.STRING);
+                        c.CellStyle = multStyle;
+                        int gen_num = rand.Next(10, 100);
+                        if (i * 2 <= count)
+                        {
+                            c.SetCellValue(number + "×" + gen_num + "=");
+                        }
+                        else
+                        {
+                            c.SetCellValue(gen_num + "×" + number + "=");
+                        }
+                        c = sheet.GetRow(headrow + i).CreateCell(Aindex, CellType.FORMULA);
+                        c.CellFormula = gen_num + "*" + number;
+                        c.CellStyle = ansStyle;
+                    }
+                    break;
+
+                case 3:
+                    c = sheet.GetRow(headrow).CreateCell(indexCount + 1);
+                    c.CellStyle = indexStyle;
+                    c.SetCellValue("三位数");
+                    c = sheet.GetRow(headrow).CreateCell(indexCount + 2);
+                    c.CellStyle = indexStyle;
+                    sheet.AddMergedRegion(new CellRangeAddress(headrow, headrow, indexCount + 1, indexCount + 2));
+
+                    for (int i = 1; i <= count; ++i)
+                    {
+                        c = sheet.GetRow(headrow + i).CreateCell(Qindex, CellType.STRING);
+                        c.CellStyle = multStyle;
+                        int gen_num = rand.Next(100, 1000);
+                        if (i * 2 <= count)
+                        {
+                            c.SetCellValue(number + "×" + gen_num + "=");
+                        }
+                        else
+                        {
+                            c.SetCellValue(gen_num + "×" + number + "=");
+                        }
+                        c = sheet.GetRow(headrow + i).CreateCell(Aindex, CellType.FORMULA);
+                        c.CellFormula = gen_num + "*" + number;
+                        c.CellStyle = ansStyle;
+                    }
+                    break;
+
+                case 4:
+                    c = sheet.GetRow(headrow).CreateCell(indexCount + 1);
+                    c.CellStyle = indexStyle;
+                    c.SetCellValue("四位数");
+                    c = sheet.GetRow(headrow).CreateCell(indexCount + 2);
+                    c.CellStyle = indexStyle;
+                    sheet.AddMergedRegion(new CellRangeAddress(headrow, headrow, indexCount + 1, indexCount + 2));
+
+                    for (int i = 1; i <= count; ++i)
+                    {
+                        c = sheet.GetRow(headrow + i).CreateCell(Qindex, CellType.STRING);
+                        c.CellStyle = multStyle;
+                        int gen_num = rand.Next(1000, 10000);
+                        if (i * 2 <= count)
+                        {
+                            c.SetCellValue(number + "×" + gen_num.ToString("#,##0") + "=");
+                        }
+                        else
+                        {
+                            c.SetCellValue(gen_num.ToString("#,##0") + "×" + number + "=");
+                        }
+                        c = sheet.GetRow(headrow + i).CreateCell(Aindex, CellType.FORMULA);
+                        c.CellFormula = gen_num + "*" + number;
+                        c.CellStyle = ansStyle;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         void InitializeWorkbook()
         {
             hssfworkbook = new HSSFWorkbook();
@@ -508,7 +653,17 @@ namespace ExportXlsToDownload
             quizStyle.SetFont(quizFont);
             quizStyle.BorderLeft = CellBorderType.THIN;
             quizStyle.BorderRight = CellBorderType.THIN;
+            quizStyle.Alignment = HorizontalAlignment.RIGHT;
             quizStyle.DataFormat = HSSFDataFormat.GetBuiltinFormat("#,##0");
+
+            multStyle = hssfworkbook.CreateCellStyle();
+            multStyle.SetFont(quizFont);
+            multStyle.BorderTop = CellBorderType.THIN;
+            multStyle.BorderBottom = CellBorderType.THIN;
+            multStyle.BorderLeft = CellBorderType.THIN;
+            multStyle.BorderRight = CellBorderType.THIN;
+            multStyle.Alignment = HorizontalAlignment.RIGHT;
+            multStyle.DataFormat = HSSFDataFormat.GetBuiltinFormat("#,##0");
 
             ansStyle = hssfworkbook.CreateCellStyle();
             Font ansFont = hssfworkbook.CreateFont();
