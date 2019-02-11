@@ -462,7 +462,6 @@ namespace ExportXlsToDownload
                 sheet.PrintSetup.Landscape = false;
                 sheet.Footer.Center = sheet.SheetName;
                 sheet.SetColumnWidth(indexCount, (int)((2.43 + 0.72) * 256));
-                sheet.SetColumnWidth(indexCount + 1, (int)((14 + 0.72) * 256));
 
                 Cell c = sheet.CreateRow(rownum++).CreateCell(0);
                 c.CellStyle = headtextStyle;
@@ -544,19 +543,12 @@ namespace ExportXlsToDownload
             switch (digit)
             {
                 case 2:
-                    c = sheet.GetRow(headrow).CreateCell(Qindex);
-                    c.CellStyle = indexStyle;
-                    c.SetCellValue("两位数");
-                    c = sheet.GetRow(headrow).CreateCell(Aindex);
-                    c.CellStyle = indexStyle;
-                    sheet.AddMergedRegion(new CellRangeAddress(headrow, headrow, indexCount + 1, indexCount + 2));
-
-                    for (int i = 1; i <= count; ++i)
+                    for (int i = 0; i <= count; ++i)
                     {
                         c = sheet.GetRow(headrow + i).CreateCell(Qindex, CellType.STRING);
                         c.CellStyle = multStyle;
                         int gen_num = rand.Next(10, 100);
-                        if (i * 2 <= count)
+                        if (rand.Next(0, 10) % 2 == 0)
                         {
                             c.SetCellValue(number + "×" + gen_num + "=");
                         }
@@ -571,19 +563,12 @@ namespace ExportXlsToDownload
                     break;
 
                 case 3:
-                    c = sheet.GetRow(headrow).CreateCell(indexCount + 1);
-                    c.CellStyle = indexStyle;
-                    c.SetCellValue("三位数");
-                    c = sheet.GetRow(headrow).CreateCell(indexCount + 2);
-                    c.CellStyle = indexStyle;
-                    sheet.AddMergedRegion(new CellRangeAddress(headrow, headrow, indexCount + 1, indexCount + 2));
-
-                    for (int i = 1; i <= count; ++i)
+                    for (int i = 0; i <= count; ++i)
                     {
                         c = sheet.GetRow(headrow + i).CreateCell(Qindex, CellType.STRING);
                         c.CellStyle = multStyle;
                         int gen_num = rand.Next(100, 1000);
-                        if (i * 2 <= count)
+                        if (rand.Next(0, 10) % 2 == 0)
                         {
                             c.SetCellValue(number + "×" + gen_num + "=");
                         }
@@ -598,25 +583,18 @@ namespace ExportXlsToDownload
                     break;
 
                 case 4:
-                    c = sheet.GetRow(headrow).CreateCell(indexCount + 1);
-                    c.CellStyle = indexStyle;
-                    c.SetCellValue("四位数");
-                    c = sheet.GetRow(headrow).CreateCell(indexCount + 2);
-                    c.CellStyle = indexStyle;
-                    sheet.AddMergedRegion(new CellRangeAddress(headrow, headrow, indexCount + 1, indexCount + 2));
-
-                    for (int i = 1; i <= count; ++i)
+                    for (int i = 0; i <= count; ++i)
                     {
                         c = sheet.GetRow(headrow + i).CreateCell(Qindex, CellType.STRING);
                         c.CellStyle = multStyle;
                         int gen_num = rand.Next(1000, 10000);
-                        if (i * 2 <= count)
+                        if (rand.Next(0, 10) % 2 == 0)
                         {
-                            c.SetCellValue(number + "×" + gen_num.ToString("#,##0") + "=");
+                            c.SetCellValue(number + "×" + gen_num + "=");
                         }
                         else
                         {
-                            c.SetCellValue(gen_num.ToString("#,##0") + "×" + number + "=");
+                            c.SetCellValue(gen_num + "×" + number + "=");
                         }
                         c = sheet.GetRow(headrow + i).CreateCell(Aindex, CellType.FORMULA);
                         c.CellFormula = gen_num + "*" + number;
