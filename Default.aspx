@@ -40,6 +40,10 @@
             <asp:TextBox ID="TextBox8" runat="server" ReadOnly="True" Text="庆龄珠心算小学组训练题" Width="50%"></asp:TextBox>
             <asp:Button ID="Button8" runat="server" OnClick="Button8_Click" Text="下载" style="height: 21px"/>
         </div>
+        <div style="margin:20px auto; width:100%" align="center">
+            <asp:TextBox ID="TextBox9" runat="server" ReadOnly="True" Text="10级*1 + 9级*1 + 8级*1 + 7级*1" Width="50%"></asp:TextBox>
+            <asp:Button ID="Button9" runat="server" OnClick="Button9_Click" Text="下载" style="height: 21px"/>
+        </div>
     </form>
 </body>
 </html>

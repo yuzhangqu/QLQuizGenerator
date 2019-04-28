@@ -149,6 +149,19 @@ namespace ExportXlsToDownload
             Response.End();
         }
 
+        protected void Button9_Click(object sender, EventArgs e)
+        {
+            string filename = "quiz.zip";
+            Response.ContentType = "application/zip";
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", filename));
+            Response.Clear();
+
+            InitializeWorkbook();
+            GenerateData9();
+            Response.BinaryWrite(WriteToStream().GetBuffer());
+            Response.End();
+        }
+
         HSSFWorkbook hssfworkbook;
         CellStyle indexStyle;
         CellStyle quizStyle;
@@ -481,6 +494,28 @@ namespace ExportXlsToDownload
                 Print<Lv7>(ref sheet, ref rownum, ref rand, ref index);
                 PrintMulti(ref sheet, headrow, ref rand, indexCount + 1, sheetNum + 1, 4, 12);
                 
+            }
+        }
+
+        void GenerateData9()
+        {
+            Random rand = new Random();
+            for (int sheetNum = 1; sheetNum <= 20; ++sheetNum)
+            {
+                int index = 1;
+                int rownum = 0;
+                Sheet sheet = hssfworkbook.CreateSheet(sheetNum.ToString());
+                sheet.DefaultColumnWidth = 11;
+                sheet.DefaultRowHeightInPoints = 20;
+                sheet.PrintSetup.PaperSize = (short)PaperSize.A4;
+                sheet.PrintSetup.Landscape = false;
+                sheet.Footer.Center = sheet.SheetName;
+
+                PrintHeader(ref sheet, ref rownum);
+                Print<Lv10>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv8>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Lv7>(ref sheet, ref rownum, ref rand, ref index);
             }
         }
 

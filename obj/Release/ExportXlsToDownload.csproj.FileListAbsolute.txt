@@ -6,3 +6,10 @@ D:\Projects\NPOI.Examples\ExportXlsToDownload\bin\Ionic.Zip.dll
 D:\Projects\NPOI.Examples\ExportXlsToDownload\obj\Release\ExportXlsToDownload.csprojResolveAssemblyReference.cache
 D:\Projects\NPOI.Examples\ExportXlsToDownload\obj\Release\ExportXlsToDownload.dll
 D:\Projects\NPOI.Examples\ExportXlsToDownload\obj\Release\ExportXlsToDownload.pdb
+D:\repos\QLQuizGenerator\bin\ExportXlsToDownload.dll
+D:\repos\QLQuizGenerator\bin\ExportXlsToDownload.pdb
+D:\repos\QLQuizGenerator\obj\Release\ExportXlsToDownload.csproj.CoreCompileInputs.cache
+D:\repos\QLQuizGenerator\obj\Release\ExportXlsToDownload.csproj.CopyComplete
+D:\repos\QLQuizGenerator\obj\Release\ExportXlsToDownload.dll
+D:\repos\QLQuizGenerator\obj\Release\ExportXlsToDownload.pdb
+D:\repos\QLQuizGenerator\obj\Release\ExportXlsToDownload.csprojResolveAssemblyReference.cache
