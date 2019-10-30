@@ -90,6 +90,7 @@
     <Compile Include="Lv6.cs" />
     <Compile Include="Lv7.cs" />
     <Compile Include="Lv8.cs" />
+    <Compile Include="Break5.cs" />
     <Compile Include="Lv9.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

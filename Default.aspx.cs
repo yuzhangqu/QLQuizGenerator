@@ -162,6 +162,19 @@ namespace ExportXlsToDownload
             Response.End();
         }
 
+        protected void Button10_Click(object sender, EventArgs e)
+        {
+            string filename = "quiz.zip";
+            Response.ContentType = "application/zip";
+            Response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}", filename));
+            Response.Clear();
+
+            InitializeWorkbook();
+            GenerateData10();
+            Response.BinaryWrite(WriteToStream().GetBuffer());
+            Response.End();
+        }
+
         HSSFWorkbook hssfworkbook;
         CellStyle indexStyle;
         CellStyle quizStyle;
@@ -516,6 +529,39 @@ namespace ExportXlsToDownload
                 Print<Lv9>(ref sheet, ref rownum, ref rand, ref index);
                 Print<Lv8>(ref sheet, ref rownum, ref rand, ref index);
                 Print<Lv7>(ref sheet, ref rownum, ref rand, ref index);
+            }
+        }
+
+        void GenerateData10()
+        {
+            Random rand = new Random();
+            for (int sheetNum = 1; sheetNum <= 20; ++sheetNum)
+            {
+                int index = 1;
+                int rownum = 0;
+                Sheet sheet = hssfworkbook.CreateSheet(sheetNum.ToString());
+                sheet.DefaultColumnWidth = 13;
+                sheet.DefaultRowHeightInPoints = 15;
+                sheet.PrintSetup.PaperSize = (short)PaperSize.A4;
+                sheet.PrintSetup.Landscape = false;
+                sheet.Footer.Center = sheet.SheetName;
+
+                indexCount = 6;
+
+                Cell c = sheet.CreateRow(rownum++).CreateCell(0);
+                c.CellStyle = headtextStyle;
+                c.SetCellValue("庆龄幼儿园满5加破5减训练题");
+                sheet.AddMergedRegion(new CellRangeAddress(0, 0, 0, indexCount - 1));
+
+                indexStyle.GetFont(hssfworkbook).FontHeightInPoints = 14;
+                quizStyle.GetFont(hssfworkbook).FontHeightInPoints = 16;
+                ansStyle.GetFont(hssfworkbook).FontHeightInPoints = 16;
+
+                Print<Break5>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Break5>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Break5>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Break5>(ref sheet, ref rownum, ref rand, ref index);
+                Print<Break5>(ref sheet, ref rownum, ref rand, ref index);
             }
         }
 

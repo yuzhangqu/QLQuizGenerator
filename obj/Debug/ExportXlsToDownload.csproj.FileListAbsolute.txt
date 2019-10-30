@@ -16,7 +16,6 @@ D:\repos\QLQuizGenerator\bin\ExportXlsToDownload.dll.config
 D:\repos\QLQuizGenerator\bin\ExportXlsToDownload.dll
 D:\repos\QLQuizGenerator\bin\ExportXlsToDownload.pdb
 D:\repos\QLQuizGenerator\obj\Debug\ExportXlsToDownload.csprojAssemblyReference.cache
-D:\repos\QLQuizGenerator\obj\Debug\ExportXlsToDownload.csproj.CoreCompileInputs.cache
 D:\repos\QLQuizGenerator\obj\Debug\ExportXlsToDownload.csproj.CopyComplete
 D:\repos\QLQuizGenerator\obj\Debug\ExportXlsToDownload.dll
 D:\repos\QLQuizGenerator\obj\Debug\ExportXlsToDownload.pdb
