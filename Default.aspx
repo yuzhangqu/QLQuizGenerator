@@ -37,7 +37,7 @@
             <asp:Button ID="Button7" runat="server" OnClick="Button7_Click" Text="下载" style="height: 21px"/>
         </div>
         <div style="margin:20px auto; width:100%" align="center">
-            <asp:TextBox ID="TextBox8" runat="server" ReadOnly="True" Text="庆龄珠心算小学组训练题" Width="50%"></asp:TextBox>
+            <asp:TextBox ID="TextBox8" runat="server" ReadOnly="True" Text="小学组乘法训练题" Width="50%"></asp:TextBox>
             <asp:Button ID="Button8" runat="server" OnClick="Button8_Click" Text="下载" style="height: 21px"/>
         </div>
         <div style="margin:20px auto; width:100%" align="center">
@@ -47,6 +47,10 @@
         <div style="margin:20px auto; width:100%" align="center">
             <asp:TextBox ID="TextBox10" runat="server" ReadOnly="True" Text="满5加破5减" Width="50%"></asp:TextBox>
             <asp:Button ID="Button10" runat="server" OnClick="Button10_Click" Text="下载" style="height: 21px"/>
+        </div>
+        <div style="margin:20px auto; width:100%" align="center">
+            <asp:TextBox ID="TextBox11" runat="server" ReadOnly="True" Text="小学组带小数加法" Width="50%"></asp:TextBox>
+            <asp:Button ID="Button11" runat="server" OnClick="Button11_Click" Text="下载" style="height: 21px"/>
         </div>
     </form>
 </body>

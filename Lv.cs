@@ -18,6 +18,7 @@ namespace ExportXlsToDownload
         public int FourDigitMinus { get; set; }
         public int FiveDigit { get; set; }
         public int FiveDigitMinus { get; set; }
+        public double Scale { get; set; }
 
         private List<int> Ones = new List<int>();
         private List<int> Twos = new List<int>();
@@ -39,6 +40,7 @@ namespace ExportXlsToDownload
             FourDigitMinus = 0;
             FiveDigit = 0;
             FiveDigitMinus = 0;
+            Scale = 1;
 
             Ones = new List<int>();
         }

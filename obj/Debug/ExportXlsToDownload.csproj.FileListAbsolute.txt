@@ -19,3 +19,9 @@ D:\repos\QLQuizGenerator\obj\Debug\ExportXlsToDownload.csprojAssemblyReference.c
 D:\repos\QLQuizGenerator\obj\Debug\ExportXlsToDownload.csproj.CopyComplete
 D:\repos\QLQuizGenerator\obj\Debug\ExportXlsToDownload.dll
 D:\repos\QLQuizGenerator\obj\Debug\ExportXlsToDownload.pdb
+D:\repos\QLQuizGenerator\bin\ICSharpCode.SharpZipLib.dll
+D:\repos\QLQuizGenerator\bin\NPOI.dll
+D:\repos\QLQuizGenerator\bin\NPOI.OOXML.dll
+D:\repos\QLQuizGenerator\bin\NPOI.OpenXml4Net.dll
+D:\repos\QLQuizGenerator\bin\NPOI.OpenXmlFormats.dll
+D:\repos\QLQuizGenerator\bin\ICSharpCode.SharpZipLib.xml
